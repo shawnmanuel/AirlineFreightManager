@@ -46,16 +46,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Airport\Airport.cs" />
+    <Compile Include="Airport\AirportRepository.cs" />
+    <Compile Include="Airport\IAirport.cs" />
+    <Compile Include="Airport\IAirportRepository.cs" />
+    <Compile Include="Airport\AirportManagement.cs" />
+    <Compile Include="Common\JsonFileReader.cs" />
     <Compile Include="Flight\Flight.cs" />
     <Compile Include="Flight\FlightRepository.cs" />
     <Compile Include="Flight\IFlight.cs" />
-    <Compile Include="Flight\iFlightRepository.cs" />
-    <Compile Include="Flight\InventoryManagement.cs" />
-    <Compile Include="Flight\FlightConverter.cs" />
+    <Compile Include="Flight\IFlightRepository.cs" />
+    <Compile Include="Flight\FlightScheduler.cs" />
     <Compile Include="Order\IOrder.cs" />
-    <Compile Include="Order\iOrderRepository.cs" />
+    <Compile Include="Order\IOrderRepository.cs" />
     <Compile Include="Order\Order.cs" />
-    <Compile Include="Order\OrderConverter.cs" />
     <Compile Include="Order\OrderProcessor.cs" />
     <Compile Include="Order\OrderRepository.cs" />
     <Compile Include="Program.cs" />
@@ -63,9 +67,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="coding-assigment-airports.json" />
     <None Include="coding-assigment-flights.json" />
     <None Include="coding-assigment-orders.json" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

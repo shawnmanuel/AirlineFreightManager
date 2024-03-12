@@ -1,4 +1,4 @@
-﻿using AirlineFreightManager.Order;
+﻿using AirlineFreightManager.Common;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,24 +9,24 @@ using System.Threading.Tasks;
 
 namespace AirlineFreightManager.Flight
 {
-    // OrderRepository implementation (reading JSON)
+    // FlightRepository implementation (reading JSON)
     public class FlightRepository : IFlightRepository
     {
-        public List<IFlight> GetFlights()
+        List<Flight> flights = new List<Flight>();
+        public FlightRepository(string filePath)
         {
-            List<IFlight> flights = new List<IFlight>();
-
             // Logic to read orders from JSON file using path
-            string filePath = "coding-assigment-flights.json";
-            string json = "";
-            using (StreamReader reader = File.OpenText(Path.Combine(Directory.GetCurrentDirectory(), filePath)))
-            {
-                json = reader.ReadToEnd();
-            }
+            if (filePath != null && filePath != "")
+                filePath = "coding-assigment-flights.json";
+
+            JsonFileReader jsonFileReader = new JsonFileReader();
+            string json = jsonFileReader.ReadFile(filePath);
 
             // Parse the JSON into a dictionary with a slightly different structure
-            flights = JsonConvert.DeserializeObject<List<IFlight>>(json, new JsonConverter[] { new FlightConverter() });
-
+            flights = JsonConvert.DeserializeObject<List<Flight>>(json);
+        }
+        public IEnumerable<IFlight> GetFlights()
+        {
             return flights;
         }
     }

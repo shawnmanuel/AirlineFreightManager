@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace AirlineFreightManager.Flight
 {
-    public class InventoryManagement
+    public class FlightScheduler
     {
         private readonly IFlightRepository _flightRepository;
 
-        public InventoryManagement(IFlightRepository flightRepository)
+        public FlightScheduler(IFlightRepository flightRepository)
         {
             _flightRepository = flightRepository;
         }
 
         public void LoadFlightSchedule()
         {
-            List<IFlight> flights = _flightRepository.GetFlights();
+            IEnumerable<IFlight> flights = _flightRepository.GetFlights();
             Console.WriteLine("List Flight Schedule:");
             foreach (Flight flight in flights)
             {

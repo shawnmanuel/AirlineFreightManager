@@ -9,6 +9,6 @@ namespace AirlineFreightManager.Order
     // Interface for Order data access
     public interface IOrderRepository
     {
-        List<IOrder> GetOrders();
+        IEnumerable<IOrder> GetOrders();
     }
 }
