@@ -1,0 +1,38 @@
+[
+  {
+    "flightNumber": 1,
+    "depature": "YUL",
+    "arrival": "YYZ",
+    "day": 1
+  },
+  {
+    "flightNumber": 2,
+    "depature": "YUL",
+    "arrival": "YYC",
+    "day": 1
+  },
+  {
+    "flightNumber": 3,
+    "depature": "YUL",
+    "arrival": "YVR",
+    "day": 1
+  },
+  {
+    "flightNumber": 4,
+    "depature": "YUL",
+    "arrival": "YYZ",
+    "day": 2
+  },
+  {
+    "flightNumber": 5,
+    "depature": "YUL",
+    "arrival": "YYC",
+    "day": 2
+  },
+  {
+    "flightNumber": 6,
+    "depature": "YUL",
+    "arrival": "YVR",
+    "day": 2
+  }
+]
