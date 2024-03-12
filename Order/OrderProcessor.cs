@@ -19,20 +19,19 @@ namespace AirlineFreightManager.Order
             _flightRepository = flightRepository;
         }
 
-        public void AssignOrdersToFlights()
+        public void ScheduleOrder()
         {
-            List<IFlight> flights = _flightRepository.GetFlights();
-            List<IOrder> orders = _orderRepository.GetOrders();
-            Console.WriteLine("List Flight Orders:");
+            IEnumerable<IFlight> flights = _flightRepository.GetFlights();
+            IEnumerable<IOrder> orders = _orderRepository.GetOrders();
+            Console.WriteLine("List Scheduled Order Flights:");
 
-            foreach (IOrder order in orders)
+            foreach (Order order in orders)
             {
                 // Find the first flight with matching destination and enough space
                 IFlight matchingFlight = flights.FirstOrDefault(f => f.ArrivalAirport == order.Destination && f.AvailableSpace > 0);
-                if (matchingFlight != null)
+                if (matchingFlight != null && matchingFlight.AddScheduledOrder(order))
                 {
                     order.Flight = matchingFlight;
-                    matchingFlight.AvailableSpace--;
                     Console.WriteLine($"Order: {order.Id}, flightNumber: {order.Flight.FlightNumber}, departure: {order.Flight.DepartureAirport}, arrival: {order.Flight.ArrivalAirport}, day: {order.Flight.Day}");
 
                 }

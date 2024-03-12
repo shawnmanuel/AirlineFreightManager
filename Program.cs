@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AirlineFreightManager;
 using AirlineFreightManager.Order;
 using AirlineFreightManager.Flight;
+using AirlineFreightManager.Airport;
 using Newtonsoft.Json;
 
 namespace AirlineFreightManager
@@ -15,17 +16,24 @@ namespace AirlineFreightManager
     {
         static void Main(string[] args)
         {
+            string filePath = "";
             //USER STORY #1  
-
-            FlightRepository flightRepository = new FlightRepository();
-            InventoryManagement inventoryManagement = new InventoryManagement(flightRepository);
+            if(args!=null && args.Length > 0)
+            {
+                filePath = args[0];
+            }
+            FlightRepository flightRepository = new FlightRepository(filePath);
+            FlightScheduler inventoryManagement = new FlightScheduler(flightRepository);
             inventoryManagement.LoadFlightSchedule();
 
             //USER STORY #2  
-
-            OrderRepository orderRepository = new OrderRepository();
+            if (args != null && args.Length > 1)
+            {
+                filePath = args[1];
+            }
+            OrderRepository orderRepository = new OrderRepository(filePath);
             OrderProcessor orderProcessor = new OrderProcessor(orderRepository, flightRepository);
-            orderProcessor.AssignOrdersToFlights();
+            orderProcessor.ScheduleOrder();
             Console.ReadLine();
         }
     }

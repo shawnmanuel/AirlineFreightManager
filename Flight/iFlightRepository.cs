@@ -10,6 +10,6 @@ namespace AirlineFreightManager.Flight
     // Interface for Flight data access
     public interface IFlightRepository
     {
-        List<IFlight> GetFlights();
+        IEnumerable<IFlight> GetFlights();
     }
 }

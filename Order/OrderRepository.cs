@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using AirlineFreightManager.Common;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,22 +12,27 @@ namespace AirlineFreightManager.Order
     // OrderRepository implementation (reading JSON)
     public class OrderRepository : IOrderRepository
     {
-        public List<IOrder> GetOrders()
+        public List<Order> orders { get; private set; }
+        public OrderRepository(string filePath)
         {
+            this.orders = new List<Order>();
             // Logic to read orders from JSON file using path
-            string filePath = "coding-assigment-orders.json";
-            string json = "";
-            using (StreamReader reader = File.OpenText(Path.Combine(Directory.GetCurrentDirectory(), filePath)))
-            {
-                json = reader.ReadToEnd();
-            }
-
+            if (filePath != null && filePath != "")
+                filePath = "coding-assigment-orders.json";
+            JsonFileReader jsonFileReader = new JsonFileReader();
+            string json = jsonFileReader.ReadFile(filePath);
             // Parse the JSON into a dictionary with a slightly different structure
-            Dictionary<string, Order> ordersDictionary = JsonConvert.DeserializeObject<Dictionary<string, Order>>(json, new JsonConverter[] { new OrderConverter() });
+            Dictionary<string, Order> ordersDictionary = JsonConvert.DeserializeObject<Dictionary<string, Order>>(json);
 
-            // Convert the dictionary to a list (optional)
-            List<IOrder> orders = new List<IOrder>(ordersDictionary.Values);
+            foreach (KeyValuePair<string, Order> order in ordersDictionary)
+            {
+                order.Value.Id = order.Key;
+                this.orders.Add(order.Value);
+            }
+        }
 
+        public IEnumerable<IOrder> GetOrders()
+        {
             return orders;
         }
     }

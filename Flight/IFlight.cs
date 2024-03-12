@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AirlineFreightManager.Order;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,9 +13,12 @@ namespace AirlineFreightManager.Flight
     {
         int FlightNumber { get; }
         string DepartureAirport { get; }
+
         string ArrivalAirport { get; }
         int Day { get; }
         int Capacity { get; }
-        int AvailableSpace { get; set; }
+        int AvailableSpace { get; }
+
+        bool AddScheduledOrder(IOrder order);
     }
 }
